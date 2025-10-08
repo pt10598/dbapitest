@@ -17,7 +17,6 @@ def api_query():
 
     # Heroku Chrome 設定
     chrome_options = Options()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
@@ -25,11 +24,8 @@ def api_query():
     chrome_options.add_argument('--remote-debugging-port=9222')
     chrome_options.add_argument('--window-size=1920,1080')
 
-    # Heroku ChromeDriver 路徑
-    driver = webdriver.Chrome(
-        executable_path=os.environ.get("CHROMEDRIVER_PATH"), 
-        options=chrome_options
-    )
+    # 初始化 driver
+    driver = webdriver.Chrome(options=chrome_options)
     
     try:
         driver.get('https://ppstrq.nat.gov.tw/pps/pubQuery/PropertyQuery/propertyQuery.do')
